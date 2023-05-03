@@ -1,6 +1,8 @@
 
 import styles from "./App.module.css";
+import { useState } from "react";
 import {User} from './User'
+
 
 
 function App() {
@@ -30,20 +32,57 @@ function App() {
   //   { name: 'louis', age : 29},
   // ]
 
-  const planets = [ 
-    { name: 'Mars', isGasPlane: false},
-    { name: 'Earth', isGasPlane: false},
-    { name: 'Jupiter', isGasPlane: true},
-    { name: 'Venus', isGasPlane: false},
-    { name: 'Neptune', isGasPlane: true},
-    { name: 'Uranus', isGasPlane: true},
-    { name: 'Saturn', isGasPlane: true},
-    { name: 'Mercury', isGasPlane: false},
-  ];
+  // const planets = [ 
+  //   { name: 'Mars', isGasPlane: false},
+  //   { name: 'Earth', isGasPlane: false},
+  //   { name: 'Jupiter', isGasPlane: true},
+  //   { name: 'Venus', isGasPlane: false},
+  //   { name: 'Neptune', isGasPlane: true},
+  //   { name: 'Uranus', isGasPlane: true},
+  //   { name: 'Saturn', isGasPlane: true},
+  //   { name: 'Mercury', isGasPlane: false},
+  // ];
 
+  const [age, setAge] = useState(0) ; // starting point
+  // we can get inside of [variable,function]
+  // we need to create a function that will be used to change the value. 
+  // let age = 0 // js form 
+  const IncreaseAge = () => { 
+    // age += 1; // age = age + 1 ; 
+    setAge(age + 1) //React.js form
+    console.log(age)
+  } 
+  const DecreaseAge = () => { 
+    setAge(age - 1)
+  }
+  const SetToZero = () => { 
+    setAge(0)
+  }
+
+  const [inputValue, setInputValue] = useState("");
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value)//React.js Form
+    console.log(event.target.value)
+  };
+
+  const [showText, setShowText] = useState(true)
+  const [textColor, setTextColor] = useState('black')
+  
   return (
     <div className={styles.App}>
-      {/* call the components like of this */}
+      {age < 0 ? <p style={{color:'red'}}>{age}</p> : <p>{age}</p>}
+      <button onClick={IncreaseAge}> Increase Age </button> 
+      <button onClick ={DecreaseAge}> Decrease Age</button>
+      <button onClick ={SetToZero}> SetToZero</button>
+
+      <input type="text" onChange={handleInputChange}/>
+    
+      {/* anonymous function we used it */}
+      <button onClick={ ()=> {setShowText(!showText)} }>Show / Hide</button>
+      <button onClick={()=> {setTextColor(textColor==='black'? 'red':'black')}} >Change Color</button>
+      {showText && <h1 style={{color:'black'}}>Hi my age is {age} <h2 style={{color:textColor}}>{inputValue}</h2>  </h1> }
+
+        {/* call the components like of this */}
        {/* <User name='Efe' age={26} email='efe@efes.com'/> 
        <User name='Antoine' age={28} email='antoine@antoine.com'/> 
        <User name='Louis' age={29} email='louis@louis.com'/> 
@@ -74,16 +113,21 @@ function App() {
       )
      })} */}
 
-    {planets.map((planet,key)=> 
-     planet.isGasPlane && <h1>{planet.name}</h1>
-    )}
+      {/* {planets.map((planet,key)=> 
+
+    // planet.isGasPlane && <h1>{planet.name}</h1>
+    //  !planet.isGasPlane && <h1>{planet.name}</h1> //others view
+    )}    */}
+
+    
+      
+
     </div>
-  );
+  )
 } 
-    // 01:04:15
+   
 
-
-// const User = (props) => {  // react component
+    {/* const User = (props) => {  // react component
 //   // always be returning
 //       return (
 //         <div>
@@ -118,5 +162,6 @@ function App() {
     // every component needs to start with capital letter
     // const GetNameComponent = () => {  // react component
     //   return <h2>Efes</h2> // always be returning
-    // }
-export default App;
+    // } */}
+ 
+    export default App;
