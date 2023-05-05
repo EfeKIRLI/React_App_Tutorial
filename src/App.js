@@ -2,6 +2,7 @@
 import styles from "./App.module.css";
 import { useState } from "react";
 import {User} from './User'
+import {Text} from './Text'
 
 
 
@@ -43,34 +44,44 @@ function App() {
   //   { name: 'Mercury', isGasPlane: false},
   // ];
 
-  const [age, setAge] = useState(0) ; // starting point
-  // we can get inside of [variable,function]
-  // we need to create a function that will be used to change the value. 
-  // let age = 0 // js form 
-  const IncreaseAge = () => { 
-    // age += 1; // age = age + 1 ; 
-    setAge(age + 1) //React.js form
-    console.log(age)
-  } 
-  const DecreaseAge = () => { 
-    setAge(age - 1)
-  }
-  const SetToZero = () => { 
-    setAge(0)
-  }
+  // const [age, setAge] = useState(0) ; // starting point
+  // // we can get inside of [variable,function]
+  // // we need to create a function that will be used to change the value. 
+  // // let age = 0 // js form 
+  // const IncreaseAge = () => { 
+  //   // age += 1; // age = age + 1 ; 
+  //   setAge(age + 1) //React.js form
+  //   console.log(age)
+  // } 
+  // const DecreaseAge = () => { 
+  //   setAge(age - 1)
+  // }
+  // const SetToZero = () => { 
+  //   setAge(0)
+  // }
 
-  const [inputValue, setInputValue] = useState("");
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value)//React.js Form
-    console.log(event.target.value)
-  };
+  // const [inputValue, setInputValue] = useState("");
+  // const handleInputChange = (event) => {
+  //   setInputValue(event.target.value)//React.js Form
+  //   console.log(event.target.value)
+  // };
 
-  const [showText, setShowText] = useState(true)
-  const [textColor, setTextColor] = useState('black')
+  // const [showText, setShowText] = useState(true)
+  // const [textColor, setTextColor] = useState('black')
+
+  const [showText , setShowText] = useState(false)
   
   return (
     <div className={styles.App}>
-      {age < 0 ? <p style={{color:'red'}}>{age}</p> : <p>{age}</p>}
+
+      <button onClick={()=> { 
+        console.log(!showText)
+        setShowText(!showText)
+
+      }}
+      >Show Text</button>
+      {showText && <Text />}
+      {/* {age < 0 ? <p style={{color:'red'}}>{age}</p> : <p>{age}</p>}
       <button onClick={IncreaseAge}> Increase Age </button> 
       <button onClick ={DecreaseAge}> Decrease Age</button>
       <button onClick ={SetToZero}> SetToZero</button>
@@ -78,9 +89,9 @@ function App() {
       <input type="text" onChange={handleInputChange}/>
     
       {/* anonymous function we used it */}
-      <button onClick={ ()=> {setShowText(!showText)} }>Show / Hide</button>
+      {/* <button onClick={ ()=> {setShowText(!showText)} }>Show / Hide</button>
       <button onClick={()=> {setTextColor(textColor==='black'? 'red':'black')}} >Change Color</button>
-      {showText && <h1 style={{color:'black'}}>Hi my age is {age} <h2 style={{color:textColor}}>{inputValue}</h2>  </h1> }
+      {showText && <h1 style={{color:'black'}}>Hi my age is {age} <h2 style={{color:textColor}}>{inputValue}</h2>  </h1> } */} 
 
         {/* call the components like of this */}
        {/* <User name='Efe' age={26} email='efe@efes.com'/> 
