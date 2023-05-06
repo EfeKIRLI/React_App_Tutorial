@@ -1,8 +1,10 @@
 
 import styles from "./App.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {User} from './User'
 import {Text} from './Text'
+import Axios from "axios";
+
 
 
 
@@ -69,18 +71,80 @@ function App() {
   // const [showText, setShowText] = useState(true)
   // const [textColor, setTextColor] = useState('black')
 
-  const [showText , setShowText] = useState(false)
-  
+  // const [showText , setShowText] = useState(false)
+
+  // fetch("https://catfact.ninja/fact")
+  // .then((res)=>res.json())//turned into javaScript object
+  // .then((data)=>{ 
+  //   console.log(data)
+  // });
+   //grab that value and call it data, get back from the API inside of here.
+  //  const [catFact, setCatFact] = useState("") 
+
+  //  const fetcCatFact = () => { 
+  //   Axios.get("https://catfact.ninja/fact").then((res)=>{
+  //     // console.log(res.data.fact)// easier than fetch
+  //     setCatFact(res.data.fact)// this will be showing everytime component updating 
+  //   })
+  //  }
+
+  //  useEffect(()=>{ // useEffect will stop working everytime.Runs one time (once)
+  //   fetcCatFact()
+  //   // Axios.get("https://catfact.ninja/fact").then((res)=>{
+  //   //   // console.log(res.data.fact)// easier than fetch
+  //   //   setCatFact(res.data.fact)// this will be showing everytime component updating 
+  //   // })     
+  //  },[])
+
+    // const [name ,setName] = useState("");
+    // const [predictedAge, setPredictedAge]=useState(null) //useState(0)
+    // const [count , setCount] = useState(null)
+
+    // const fetcData = ()=> { 
+    //   Axios.get(`https://api.agify.io/?name=${name}`)
+    //   .then((res)=>{ 
+    //     console.log(res.data)
+    //     setPredictedAge(res.data.age)
+    //     setCount(res.data.count)
+    //   })
+    // }
+    const [generatedExcuse, setGeneratedExcuse] = useState("")
+    const fetchExcuse = (excuse) => { 
+      Axios.get(`https://excuser.herokuapp.com/v1/excuse/${excuse}/`)
+      .then((res)=>{ 
+        setGeneratedExcuse(res.data[0].excuse)
+      })
+    }
   return (
     <div className={styles.App}>
 
-      <button onClick={()=> { 
+      <h1> Generate An Excuse</h1>
+      <button onClick={()=>fetchExcuse("party")}>family</button>
+      <button onClick={()=>fetchExcuse("family")}>Party</button>
+      <button onClick={()=>fetchExcuse("office")}>Office</button>
+      <p>{generatedExcuse}</p>
+      {/* <input placeholder="Ex. Efe..." onChange={(event)=> {
+        
+        setName(event.target.value)
+        //useState sets SetName to be equal to whatever we typing in the input 
+        }} />
+      <button onClick={fetcData} >Predict Age</button>
+
+      <h1>name : {name} </h1>
+      <h1>Predicted Age : {predictedAge} </h1>
+      <h1>Count: {count} </h1> */}
+
+      {/* <button onClick={fetcCatFact} >Generate Cat Fact </button>
+      <p>{catFact}</p> */}
+
+
+      {/* <button onClick={()=> { 
         console.log(!showText)
         setShowText(!showText)
 
       }}
       >Show Text</button>
-      {showText && <Text />}
+      {showText && <Text />} */}
       {/* {age < 0 ? <p style={{color:'red'}}>{age}</p> : <p>{age}</p>}
       <button onClick={IncreaseAge}> Increase Age </button> 
       <button onClick ={DecreaseAge}> Decrease Age</button>
