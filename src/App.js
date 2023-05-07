@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import {User} from './User'
 import {Text} from './Text'
 import Axios from "axios";
+import {BrowserRouter as Router,Routes,Route,Link} from 'react-router-dom'
+import { Home } from "./pages/Home";
+import { Menu } from "./pages/Menu";
+import { Contact } from "./pages/Contact";
+import { Navbar } from "./Navbar";
 
 
 
@@ -108,21 +113,35 @@ function App() {
     //     setCount(res.data.count)
     //   })
     // }
-    const [generatedExcuse, setGeneratedExcuse] = useState("")
-    const fetchExcuse = (excuse) => { 
-      Axios.get(`https://excuser.herokuapp.com/v1/excuse/${excuse}/`)
-      .then((res)=>{ 
-        setGeneratedExcuse(res.data[0].excuse)
-      })
-    }
+    // const [generatedExcuse, setGeneratedExcuse] = useState("")
+    // const fetchExcuse = (excuse) => { 
+    //   Axios.get(`https://excuser.herokuapp.com/v1/excuse/${excuse}/`)
+    //   .then((res)=>{ 
+    //     setGeneratedExcuse(res.data[0].excuse)
+    //   })
+    // } 
   return (
     <div className={styles.App}>
+      <Router>
+        <Navbar />
+        {/* <div>
+          <Link to="/">Home</Link>
+          <Link to="/menu">Menu</Link>
+          <Link to="/contact">Contact</Link>
+        </div> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<h1>Page Not Found</h1>} />
+        </Routes>
+      </Router>
 
-      <h1> Generate An Excuse</h1>
+      {/* <h1> Generate An Excuse</h1>
       <button onClick={()=>fetchExcuse("party")}>family</button>
       <button onClick={()=>fetchExcuse("family")}>Party</button>
       <button onClick={()=>fetchExcuse("office")}>Office</button>
-      <p>{generatedExcuse}</p>
+      <p>{generatedExcuse}</p> */}
       {/* <input placeholder="Ex. Efe..." onChange={(event)=> {
         
         setName(event.target.value)
