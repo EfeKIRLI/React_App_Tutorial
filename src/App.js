@@ -4,17 +4,18 @@ import styles from "./App.module.css";
 import {User} from './User'
 import {Text} from './Text'
 import Axios from "axios";
-import {BrowserRouter as Router,Routes,Route,Link} from 'react-router-dom'
-import { Home } from "./pages/Home";
-import { Profile } from "./pages/Profile";
-import { Menu } from "./pages/Menu";
-import { Contact } from "./pages/Contact";
-import { Navbar } from "./Navbar";
-import {useState, createContext} from "react"
-import {QueryClient,QueryClientProvider} from "@tanstack/react-query"
+// import {BrowserRouter as Router,Routes,Route,Link} from 'react-router-dom'
+// import { Home } from "./pages/Home";
+// import { Profile } from "./pages/Profile";
+// import { Menu } from "./pages/Menu";
+// import { Contact } from "./pages/Contact";
+// import { Navbar } from "./Navbar";
+// import {useState, createContext} from "react"
+// import {QueryClient,QueryClientProvider} from "@tanstack/react-query"
+import { Form } from "./components/Form";
 
 
-export const AppContext = createContext();
+// export const AppContext = createContext();
 
 function App() {
   // const name = 'efe'
@@ -123,37 +124,40 @@ function App() {
     //     setGeneratedExcuse(res.data[0].excuse)
     //   })
     // } 
-    const [username, setUsername] = useState("EfeDev")
+    // const [username, setUsername] = useState("EfeDev")
 
-    const client = new QueryClient({
-      defaultOptions:{
-        queries : {
-            refetchOnWindowFocus:false,
-        },
-    }})
+    // const client = new QueryClient({
+    //   defaultOptions:{
+    //     queries : {
+    //         refetchOnWindowFocus:false,
+    //     },
+    // }})
   return (
     <div className={styles.App}>
-      <AppContext.Provider value={{username,setUsername}}>
+      
+        <Form />
+
+      {/* <AppContext.Provider value={{username,setUsername}}>
       <QueryClientProvider client={client}>
       <Router>
-        <Navbar />
+        <Navbar /> */}
         {/* <div>
           <Link to="/">Home</Link>
           <Link to="/menu">Menu</Link>
           <Link to="/contact">Contact</Link>
         </div> */}
-        <Routes>
-          <Route path="/" element={<Home/>} />
+        {/* <Routes>
+          <Route path="/" element={<Home/>} /> */}
           {/* <Route path="/" element={<Home username={username} />} /> we can delete all of the props because of AppContext we do not need anymore */}
-          <Route path="/profile" element={<Profile/>} />
+          {/* <Route path="/profile" element={<Profile/>} /> */}
           {/* <Route path="/profile" element={<Profile username={username} setUsername={setUsername} />} /> we can delete all of the props because of AppContext.we do not need anymore */}
-          <Route path="/menu" element={<Menu />} />
+          {/* <Route path="/menu" element={<Menu />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
       </Router>
       </QueryClientProvider>
-      </AppContext.Provider>
+      </AppContext.Provider> */}
       {/* <h1> Generate An Excuse</h1>
       <button onClick={()=>fetchExcuse("party")}>family</button>
       <button onClick={()=>fetchExcuse("family")}>Party</button>
